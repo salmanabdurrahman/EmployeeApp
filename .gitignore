@@ -1,0 +1,45 @@
+# Build results
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# Visual Studio cache/options
+.vs/
+.vscode/
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files
+appsettings.Development.json
+launchSettings.json
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+.nuget/
+
+# Logs
+logs/
+*.log
+
+# IDE specific files
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+publish/
+
+# Environment variables
+.env*
+!.env.example

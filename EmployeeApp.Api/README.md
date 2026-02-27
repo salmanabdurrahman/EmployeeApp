@@ -1,22 +1,49 @@
-# Employee API
+# EmployeeApp.Api
 
-A simple REST API for managing employee data using .NET and MySQL.
+RESTful API for Employee Management System built with .NET Minimal APIs.
 
-## Features
-- ✅ Get all employees
-- ✅ Get employee by ID
-- ✅ Create new employee
-- ✅ Update employee
-- ✅ Delete employee
+## 🚀 Quick Start
+
+```bash
+cd EmployeeApp.Api
+dotnet ef database update
+dotnet run
+```
+
+**API URL:** `http://localhost:5080`
+
+## 📋 Features
+
+- ✅ RESTful CRUD operations
+- ✅ MySQL database with Entity Framework Core
 - ✅ Input validation with detailed error messages
-- ✅ MySQL database
-- ✅ **Consistent response format** for all endpoints
+- ✅ Consistent JSON response format
+- ✅ Modular endpoint organization
+- ✅ Clean architecture
 
-## Response Format
+## 📖 API Endpoints
 
-All endpoints return responses in a consistent format:
+### Base URL
+```
+http://localhost:5080
+```
 
-**Success Response:**
+### Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/` | API welcome message |
+| GET | `/api/employees` | Get all employees |
+| GET | `/api/employees/{id}` | Get employee by ID |
+| POST | `/api/employees` | Create new employee |
+| PUT | `/api/employees/{id}` | Update employee |
+| DELETE | `/api/employees/{id}` | Delete employee |
+
+## 📦 Response Format
+
+All endpoints return consistent JSON format.
+
+### Success Response
 ```json
 {
   "status": "success",
@@ -25,7 +52,7 @@ All endpoints return responses in a consistent format:
 }
 ```
 
-**Error Response:**
+### Error Response
 ```json
 {
   "status": "error",
@@ -34,135 +61,32 @@ All endpoints return responses in a consistent format:
 }
 ```
 
-📖 **[View Full Response Documentation →](RESPONSE_FORMAT.md)**
+📄 **[View Full Response Documentation →](RESPONSE_FORMAT.md)**
 
-## Quick Start
-
-### Prerequisites
-- .NET 10 SDK
-- MySQL Server
-
-### Run the API
-```bash
-cd EmployeeApp.Api
-dotnet run
-```
-
-API will run at `http://localhost:5000`
-
-### Database Setup
-```sql
-CREATE DATABASE employee_db;
-```
-
-Run migrations:
-```bash
-dotnet ef database update
-```
-
-## API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/employees` | Get all employees |
-| GET | `/api/employees/{id}` | Get employee by ID |
-| POST | `/api/employees` | Create new employee |
-| PUT | `/api/employees/{id}` | Update employee |
-| DELETE | `/api/employees/{id}` | Delete employee |
-
-## Example Requests
+## 🧪 Testing with cURL
 
 ### Get All Employees
 ```bash
-curl http://localhost:5000/api/employees
-```
-
-**Response:**
-```json
-{
-  "status": "success",
-  "message": "Employees retrieved successfully",
-  "data": [
-    {
-      "id": 1,
-      "name": "John Doe",
-      "position": "Developer",
-      "salary": 5000
-    }
-  ]
-}
+curl http://localhost:5080/api/employees
 ```
 
 ### Create Employee
 ```bash
-curl -X POST http://localhost:5000/api/employees \
+curl -X POST http://localhost:5080/api/employees \
   -H "Content-Type: application/json" \
   -d '{"name":"John Doe","position":"Developer","salary":5000}'
 ```
 
-**Response:**
-```json
-{
-  "status": "success",
-  "message": "Employee created successfully",
-  "data": {
-    "id": 1,
-    "name": "John Doe",
-    "position": "Developer",
-    "salary": 5000
-  }
-}
-```
-
-### Validation Error Example
+### Update Employee
 ```bash
-curl -X POST http://localhost:5000/api/employees \
+curl -X PUT http://localhost:5080/api/employees/1 \
   -H "Content-Type: application/json" \
-  -d '{"name":"","position":"","salary":-100}'
+  -d '{"name":"John Doe","position":"Senior Developer","salary":6000}'
 ```
 
-**Response:**
-```json
-{
-  "status": "error",
-  "message": "Validation failed",
-  "errors": [
-    "Name is required",
-    "Position is required",
-    "Salary must be greater than zero"
-  ]
-}
+### Delete Employee
+```bash
+curl -X DELETE http://localhost:5080/api/employees/1
 ```
 
-## Configuration
-
-Edit `appsettings.json`:
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Database=employee_db;User=root;Password=your_password;"
-  }
-}
-```
-
-## Tech Stack
-- .NET 10
-- Entity Framework Core 9
-- MySQL (Pomelo)
-- Minimal APIs
-
-## Project Structure
-```
-EmployeeApp.Api/
-├── Models/              # Data models
-│   ├── Employee.cs
-│   └── AppDbContext.cs
-├── Responses/           # API response formats
-│   └── ApiResponse.cs
-├── Endpoints/           # API endpoints (separated)
-│   └── EmployeeEndpoints.cs
-└── Program.cs           # Application startup (clean & simple!)
-```
-
-## Documentation
-- [Response Format Guide](RESPONSE_FORMAT.md) - Complete API response documentation
+**API runs at:** `http://localhost:5080`

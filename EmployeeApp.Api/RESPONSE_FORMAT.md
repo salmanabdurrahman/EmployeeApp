@@ -249,36 +249,36 @@ DELETE /api/employees/999
 
 ### Get all employees
 ```bash
-curl http://localhost:5000/api/employees
+curl http://localhost:5080/api/employees
 ```
 
 ### Get single employee
 ```bash
-curl http://localhost:5000/api/employees/1
+curl http://localhost:5080/api/employees/1
 ```
 
 ### Create employee
 ```bash
-curl -X POST http://localhost:5000/api/employees \
+curl -X POST http://localhost:5080/api/employees \
   -H "Content-Type: application/json" \
   -d '{"name":"John Doe","position":"Developer","salary":5000}'
 ```
 
 ### Update employee
 ```bash
-curl -X PUT http://localhost:5000/api/employees/1 \
+curl -X PUT http://localhost:5080/api/employees/1 \
   -H "Content-Type: application/json" \
   -d '{"name":"John Doe","position":"Senior Developer","salary":6000}'
 ```
 
 ### Delete employee
 ```bash
-curl -X DELETE http://localhost:5000/api/employees/1
+curl -X DELETE http://localhost:5080/api/employees/1
 ```
 
 ### Test validation error
 ```bash
-curl -X POST http://localhost:5000/api/employees \
+curl -X POST http://localhost:5080/api/employees \
   -H "Content-Type: application/json" \
   -d '{"name":"","position":"","salary":-100}'
 ```

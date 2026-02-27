@@ -18,11 +18,13 @@ This project consists of two applications:
 - ✅ Minimal API design
 
 ### Web Features
-- ✅ Clean and responsive Bootstrap UI
-- ✅ Employee list with table view
-- ✅ Add, edit, and delete employees
+- ✅ **Kendo UI Grid** with jQuery for interactive data management
+- ✅ **Modal CRUD** - Add, edit, delete without page reload
+- ✅ **Auto-refresh** - Grid updates automatically after operations
+- ✅ Sortable, filterable, and paginated employee list
+- ✅ NumericTextBox for salary with currency format
 - ✅ Real-time validation feedback
-- ✅ Success/error notifications
+- ✅ Responsive UI with Bootstrap 5
 
 ## 🛠️ Tech Stack
 
@@ -34,6 +36,8 @@ This project consists of two applications:
 
 **Frontend (Web):**
 - ASP.NET Core 10 MVC
+- Kendo UI 2026.1.212 (jQuery) - **Locally hosted** (210 MB)
+- jQuery 3.7.0
 - Bootstrap 5
 - Bootstrap Icons
 - Razor Views
@@ -61,8 +65,23 @@ EmployeeApp/
 ### Prerequisites
 - .NET 10 SDK
 - MySQL Server
+- **Kendo UI for jQuery** - See [Setup Guide →](EmployeeApp.Web/KENDO_SETUP.md)
 
-### 1. Setup Database
+> ⚠️ **Important:** Kendo UI files (~210 MB) are NOT included in the repository. You must download them separately. See the [Kendo UI Setup Guide](EmployeeApp.Web/KENDO_SETUP.md) for detailed instructions.
+
+### 1. Setup Kendo UI (First Time Only)
+```bash
+# Follow the complete guide:
+cat EmployeeApp.Web/KENDO_SETUP.md
+
+# Quick summary:
+# 1. Download from https://www.telerik.com/download/kendo-ui (free trial)
+# 2. Copy files to wwwroot/lib/kendo-ui/
+# 3. Get license key from https://www.telerik.com/account/product-keys
+# 4. Create wwwroot/js/kendo-ui-license.js with your key
+```
+
+### 2. Setup Database
 ```bash
 # Create database
 mysql -u root -p
@@ -70,7 +89,7 @@ CREATE DATABASE employee_db;
 exit
 ```
 
-### 2. Run API (Terminal 1)
+### 3. Run API (Terminal 1)
 ```bash
 cd EmployeeApp.Api
 dotnet ef database update
@@ -78,14 +97,14 @@ dotnet run
 ```
 ✅ **API runs at:** `http://localhost:5080`
 
-### 3. Run Web App (Terminal 2)
+### 4. Run Web App (Terminal 2)
 ```bash
 cd EmployeeApp.Web
 dotnet run
 ```
 ✅ **Web runs at:** `http://localhost:5142`
 
-### 4. Open Browser
+### 5. Open Browser
 Navigate to: **http://localhost:5142**
 
 ## 📖 API Documentation
@@ -181,18 +200,27 @@ curl -X DELETE http://localhost:5080/api/employees/1
 
 ### Test Web UI
 1. Open browser: `http://localhost:5142`
-2. Click "Employees" in navigation
-3. Click "Add New Employee"
-4. Fill form and submit
-5. Verify employee appears in list
+2. Click "Go to Employee Grid" on home page
+3. Click "Add New Employee" button in grid toolbar
+4. Fill modal form and click "Save"
+5. **Grid auto-refreshes** - new employee appears instantly
+6. Click "Edit" button on any row to modify
+7. Click "Delete" button to remove (with confirmation)
 
 ## 📚 Additional Documentation
 
 - [API README](EmployeeApp.Api/README.md) - Detailed API documentation
 - [Web README](EmployeeApp.Web/README.md) - Web UI documentation
+- [Kendo UI Setup Guide](EmployeeApp.Web/KENDO_SETUP.md) - **How to install Kendo UI**
 - [Response Format Guide](EmployeeApp.Api/RESPONSE_FORMAT.md) - API response examples
 
 ## 🐛 Troubleshooting
+
+### Kendo UI not loading
+- Verify files exist: `ls EmployeeApp.Web/wwwroot/lib/kendo-ui/`
+- Should have: `js/kendo.all.min.js` and `styles/default-main.css`
+- Check browser console for 404 errors
+- Ensure license file exists: `wwwroot/js/kendo-ui-license.js`
 
 ### API won't start
 - Check MySQL is running: `sudo systemctl status mysql`

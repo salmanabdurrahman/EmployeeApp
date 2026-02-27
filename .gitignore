@@ -1,45 +1,109 @@
-# Build results
+## .NET Build Results
 bin/
 obj/
+out/
+[Dd]ebug/
+[Rr]elease/
+[Bb]uilds/
 *.dll
 *.exe
 *.pdb
+*.cache
+*.mdb
+*.pidb
+*.suo
+*.dbmdl
+*.jfm
 
-# Visual Studio cache/options
+## Visual Studio / VS Code
 .vs/
 .vscode/
 *.user
 *.userosscache
 *.sln.docstates
+*.vsidx
+*.vssscc
+.vscode-test/
+.ionide/
 
-# User-specific files
+## Rider
+.idea/
+*.sln.iml
+
+## User-specific files (Keep these for security)
 appsettings.Development.json
 launchSettings.json
+secrets.json
+*.pfx
+*.p12
 
-# NuGet
+## NuGet
 packages/
 *.nupkg
 *.snupkg
 .nuget/
+project.lock.json
+project.fragment.lock.json
+artifacts/
 
-# Logs
+## Logs and Diagnostics
 logs/
 *.log
+*.log.*
+*.tmp
+*.temp
+TestResults/
+BenchmarkDotNet.Artifacts/
 
-# IDE specific files
-.idea/
+## Database
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+
+## Static web assets (Keep lib/ but ignore contents except README)
+**/wwwroot/lib/*
+!**/wwwroot/lib/README.md
+node_modules/
+package-lock.json
+yarn.lock
+
+## Kendo UI License (personal key - do not commit)
+**/wwwroot/js/kendo-ui-license.js
+
+## Compiled web assets
+wwwroot/css/site.min.css
+wwwroot/js/site.min.js
+wwwroot/**/*.min.css
+wwwroot/**/*.min.js
+!wwwroot/lib/**/*.min.*
+
+## OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+## Build Artifacts
+dist/
+publish/
+[Pp]ublish[Pp]rofiles/
+*.PublishSettings
+
+## Environment Variables
+.env
+.env.*
+!.env.example
+
+## Others
+*.bak
 *.swp
 *.swo
 *~
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# Build artifacts
-dist/
-publish/
-
-# Environment variables
-.env*
-!.env.example
+*.orig
+*.rej

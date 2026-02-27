@@ -4,43 +4,17 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome to Employee Management System</h1>
-    <p class="lead">Manage your employees efficiently with our simple and intuitive interface.</p>
+    <p class="lead">Manage your employees efficiently with Kendo UI Grid powered interface.</p>
     
     <div class="row mt-5">
-        <div class="col-md-4">
+        <div class="col-md-6 offset-md-3">
             <div class="card">
                 <div class="card-body text-center">
                     <i class="bi bi-people display-3 text-primary"></i>
-                    <h5 class="card-title mt-3">Manage Employees</h5>
-                    <p class="card-text">Add, edit, and delete employee records easily.</p>
-                    <a asp-controller="Employee" asp-action="Index" class="btn btn-primary">
-                        Go to Employees
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body text-center">
-                    <i class="bi bi-person-plus display-3 text-success"></i>
-                    <h5 class="card-title mt-3">Add New Employee</h5>
-                    <p class="card-text">Quick access to add new employee to the system.</p>
-                    <a asp-controller="Employee" asp-action="Create" class="btn btn-success">
-                        Add Employee
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body text-center">
-                    <i class="bi bi-info-circle display-3 text-info"></i>
-                    <h5 class="card-title mt-3">About System</h5>
-                    <p class="card-text">Employee management powered by .NET and MySQL.</p>
-                    <a href="#" class="btn btn-info">
-                        Learn More
+                    <h5 class="card-title mt-3">Employee Management</h5>
+                    <p class="card-text">View, add, edit, and delete employee records with our interactive grid interface.</p>
+                    <a asp-controller="Employee" asp-action="Index" class="btn btn-primary btn-lg">
+                        <i class="bi bi-arrow-right-circle"></i> Go to Employee
                     </a>
                 </div>
             </div>

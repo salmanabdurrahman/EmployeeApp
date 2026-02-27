@@ -1,0 +1,336 @@
+# Employee Management System
+
+Full-stack employee management application with RESTful API and Web UI.
+
+## 🚀 Overview
+
+This project consists of two applications:
+- **EmployeeApp.API** - RESTful API backend with MySQL database
+- **EmployeeApp.Web** - Web UI built with ASP.NET Core MVC
+
+## 📋 Features
+
+### API Features
+- ✅ RESTful CRUD operations
+- ✅ MySQL database with Entity Framework Core
+- ✅ Input validation with detailed error messages
+- ✅ Consistent JSON response format
+- ✅ Minimal API design
+
+### Web Features
+- ✅ Clean and responsive Bootstrap UI
+- ✅ Employee list with table view
+- ✅ Add, edit, and delete employees
+- ✅ Real-time validation feedback
+- ✅ Success/error notifications
+
+## 🛠️ Tech Stack
+
+**Backend (API):**
+- .NET 10
+- Entity Framework Core 9
+- MySQL (Pomelo)
+- Minimal APIs
+
+**Frontend (Web):**
+- ASP.NET Core 10 MVC
+- Bootstrap 5
+- Bootstrap Icons
+- Razor Views
+
+## 📁 Project Structure
+
+```
+EmployeeApp/
+├── EmployeeApp.Api/         # Backend API
+│   ├── Endpoints/           # API endpoints
+│   ├── Models/              # Data models
+│   ├── Responses/           # Response formats
+│   └── Program.cs           # API startup
+├── EmployeeApp.Web/         # Frontend Web UI
+│   ├── Controllers/         # MVC controllers
+│   ├── Models/              # View models
+│   ├── Services/            # API service client
+│   ├── Views/               # Razor views
+│   └── Program.cs           # Web startup
+└── README.md                # This file
+```
+
+## 🚦 Quick Start
+
+### Prerequisites
+- .NET 10 SDK
+- MySQL Server
+
+### 1. Setup Database
+```bash
+# Create database
+mysql -u root -p
+CREATE DATABASE employee_db;
+exit
+```
+
+### 2. Run API (Terminal 1)
+```bash
+cd EmployeeApp.Api
+dotnet ef database update
+dotnet run
+```
+✅ **API runs at:** `http://localhost:5080`
+
+### 3. Run Web App (Terminal 2)
+```bash
+cd EmployeeApp.Web
+dotnet run
+```
+✅ **Web runs at:** `http://localhost:5142`
+
+### 4. Open Browser
+Navigate to: **http://localhost:5142**
+
+## 📖 API Documentation
+
+### Base URL
+```
+http://localhost:5080
+```
+
+### Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/employees` | Get all employees |
+| GET | `/api/employees/{id}` | Get employee by ID |
+| POST | `/api/employees` | Create new employee |
+| PUT | `/api/employees/{id}` | Update employee |
+| DELETE | `/api/employees/{id}` | Delete employee |
+
+### Response Format
+
+**Success:**
+```json
+{
+  "status": "success",
+  "message": "Employees retrieved successfully",
+  "data": [...]
+}
+```
+
+**Error:**
+```json
+{
+  "status": "error",
+  "message": "Validation failed",
+  "errors": ["Name is required", "Salary must be greater than zero"]
+}
+```
+
+📄 **[Full API Documentation →](EmployeeApp.Api/RESPONSE_FORMAT.md)**
+
+## ⚙️ Configuration
+
+### API Configuration
+`EmployeeApp.Api/appsettings.json`:
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;Database=employee_db;User=root;Password=your_password;"
+  }
+}
+```
+
+**Port Configuration:**  
+`EmployeeApp.Api/Properties/launchSettings.json` - Set to `http://localhost:5080`
+
+### Web Configuration
+`EmployeeApp.Web/appsettings.json`:
+```json
+{
+  "ApiSettings": {
+    "BaseUrl": "http://localhost:5080"
+  }
+}
+```
+
+**Port Configuration:**  
+`EmployeeApp.Web/Properties/launchSettings.json` - Set to `http://localhost:5142`
+
+## 🧪 Testing
+
+### Test API with cURL
+```bash
+# Get all employees
+curl http://localhost:5080/api/employees
+
+# Create employee
+curl -X POST http://localhost:5080/api/employees \
+  -H "Content-Type: application/json" \
+  -d '{"name":"John Doe","position":"Developer","salary":5000}'
+
+# Get by ID
+curl http://localhost:5080/api/employees/1
+
+# Update employee
+curl -X PUT http://localhost:5080/api/employees/1 \
+  -H "Content-Type: application/json" \
+  -d '{"name":"John Doe","position":"Senior Developer","salary":6000}'
+
+# Delete employee
+curl -X DELETE http://localhost:5080/api/employees/1
+```
+
+### Test Web UI
+1. Open browser: `http://localhost:5142`
+2. Click "Employees" in navigation
+3. Click "Add New Employee"
+4. Fill form and submit
+5. Verify employee appears in list
+
+## 📚 Additional Documentation
+
+- [API README](EmployeeApp.Api/README.md) - Detailed API documentation
+- [Web README](EmployeeApp.Web/README.md) - Web UI documentation
+- [Response Format Guide](EmployeeApp.Api/RESPONSE_FORMAT.md) - API response examples
+
+## 🐛 Troubleshooting
+
+### API won't start
+- Check MySQL is running: `sudo systemctl status mysql`
+- Verify connection string in `appsettings.json`
+- Run migrations: `dotnet ef database update`
+- Check port 5080 is not in use: `lsof -i :5080`
+
+### Web can't connect to API
+- Ensure API is running first at `http://localhost:5080`
+- Check API URL in `EmployeeApp.Web/appsettings.json`
+- Verify firewall settings
+- Test API directly: `curl http://localhost:5080/api/employees`
+
+### Port already in use
+```bash
+# Check what's using the port
+lsof -i :5080  # for API
+lsof -i :5142  # for Web
+
+# Change port in Properties/launchSettings.json
+# Or run with custom port:
+dotnet run --urls "http://localhost:5081"
+```
+
+### Build errors
+```bash
+dotnet clean
+dotnet restore
+dotnet build
+```
+
+## 🎯 Running Both Projects
+
+### Option 1: Two Terminals (Recommended)
+```bash
+# Terminal 1 - API
+cd EmployeeApp.Api
+dotnet run
+
+# Terminal 2 - Web
+cd EmployeeApp.Web
+dotnet run
+```
+
+### Option 2: Background Process
+```bash
+# Start API in background
+cd EmployeeApp.Api
+dotnet run &
+
+# Start Web in foreground
+cd ../EmployeeApp.Web
+dotnet run
+```
+
+### Option 3: Using dotnet watch (Hot Reload)
+```bash
+# Terminal 1 - API with hot reload
+cd EmployeeApp.Api
+dotnet watch run
+
+# Terminal 2 - Web with hot reload
+cd EmployeeApp.Web
+dotnet watch run
+```
+
+## 🎯 Access URLs
+
+| Application | URL | Description |
+|-------------|-----|-------------|
+| **Web UI** | http://localhost:5142 | Main web interface |
+| **API** | http://localhost:5080 | REST API endpoints |
+| **API Docs** | http://localhost:5080/api/employees | Test endpoint |
+
+## 📝 Development Workflow
+
+1. **Start API first:**
+   ```bash
+   cd EmployeeApp.Api && dotnet run
+   ```
+   Wait for: `Now listening on: http://localhost:5080`
+
+2. **Start Web second:**
+   ```bash
+   cd EmployeeApp.Web && dotnet run
+   ```
+   Wait for: `Now listening on: http://localhost:5142`
+
+3. **Open browser:**
+   ```
+   http://localhost:5142
+   ```
+
+4. **Make changes:**
+   - Edit files in either project
+   - Save changes
+   - Refresh browser or restart app
+
+## 🎯 Future Enhancements
+
+- [ ] Authentication & Authorization
+- [ ] Search and filtering
+- [ ] Export to Excel/PDF
+- [ ] Department management
+- [ ] Employee photo upload
+- [ ] Pagination for large datasets
+- [ ] Logging and monitoring
+- [ ] API versioning
+- [ ] Docker containerization
+
+## 📝 License
+
+This project is for educational purposes.
+
+## 👨‍💻 Development
+
+Built with ❤️ using .NET 10, Entity Framework Core, and ASP.NET Core MVC.
+
+## 🚀 Quick Reference
+
+**Start Everything:**
+```bash
+# Terminal 1
+cd EmployeeApp.Api && dotnet run
+
+# Terminal 2  
+cd EmployeeApp.Web && dotnet run
+
+# Browser
+http://localhost:5142
+```
+
+**Test API:**
+```bash
+curl http://localhost:5080/api/employees
+```
+
+**Stop Everything:**
+```bash
+# Press Ctrl+C in both terminals
+```
